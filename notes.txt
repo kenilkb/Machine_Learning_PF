@@ -1,0 +1,51 @@
+CMD/anaconda-prompt:
+
+Make Environment: conda create -p venv python -y
+Activate Environment: conda activate venv/
+
+Create Git Repo: (By Visiting Github):
+initialize: git init
+(opt) Add Readme: 1. Create file "README.md"  2. git add README.md
+(opt) Add first Commit: git commit -m "First Commit!!!"
+(opt) You can check Status : git Status
+Declare it as main: git branch -M main
+make it sync with Repo: git remote add origin https://github.com/kenilkb/.../project.git
+Now, You'll Get both push & fetch by : git remote -v
+(check linked email id: git config --global user.email)
+(if want to change : git config --global user.email "Put_your_email@Here.nGO")
+Push it and Start Working!!!: git push -u origin main
+
+Then Make Setup.py & Requirements.txt (with "-e ." at last)
+
+
+setup.py Demo:
+
+from setuptools import find_packages,setup
+from typing import List
+
+def get_requirements(file_path)->List[str]:
+    requires = []
+    hyphen_e_dot = '-e .'
+    with open(file_path) as req_file:
+        requires = req_file.readlines()
+        requires = [i.replace('\n','') for i in requires]
+    if hyphen_e_dot in requires:
+        requires.remove(hyphen_e_dot)
+    return requires
+        
+setup(
+    name='DigitClassifier',
+    version= 1.0,
+    description='Classify Digit by Write it!',
+    author='Kenil KB',
+    author_email='bhikadiyakenil2611@gmail.com',
+    packages = find_packages(),
+    requires=get_requirements('./requirements.txt')
+)
+
+
+then run : pip install -r requirements.txt
+
+After installation and auto-creation of .egg-info file : git add .
+(opt) check status : git status
+then commit: git commit -m "Setup Done!!!" 

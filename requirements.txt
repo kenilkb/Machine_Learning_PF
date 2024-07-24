@@ -4,4 +4,9 @@ streamlit
 streamlit_drawable_canvas
 Pillow
 tensorflow
--e .
+matplotlib
+seaborn
+scikit-learn
+catboost
+xgboost
+# -e .

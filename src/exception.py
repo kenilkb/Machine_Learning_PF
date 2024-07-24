@@ -1,5 +1,7 @@
 import sys
-import logging
+
+
+
 
 def error_message_detail(error, error_details:sys):
     _,_,exe_tb = error_details.exc_info()
@@ -8,6 +10,7 @@ def error_message_detail(error, error_details:sys):
     err = str(error)
     error_message = f'Error Occured in {file} at line: {line} \n Error: {err}'
     return error_message
+
     
     
 class customException(Exception):
@@ -19,3 +22,4 @@ class customException(Exception):
         return self.error_message
     
     
+
