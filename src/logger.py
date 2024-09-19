@@ -1,7 +1,7 @@
 import logging
 import os
 from datetime import datetime
-from exception import customException
+# from .exception import customException
 import sys
 
 LOG_FILE = f'{datetime.now().strftime('%d_%m_%Y_%H_%M_%S')}.log'

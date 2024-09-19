@@ -49,3 +49,11 @@ then run : pip install -r requirements.txt
 After installation and auto-creation of .egg-info file : git add .
 (opt) check status : git status
 then commit: git commit -m "Setup Done!!!" 
+
+
+
+
+To Activate Venv & Conda:
+
+to activate (base) anywhere(will Access conda): D:\ProgramData\anaconda3\Scripts\activate
+to activate Specific(will Activate using conda): conda activate venv
