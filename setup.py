@@ -12,9 +12,10 @@ def get_requirements(file_path)->List[str]:
     if hyphen_e_dot in requires:
         requires.remove(hyphen_e_dot)
     return requires
-        
 
-setup(
+
+        
+setup( 
     name='DigitClassifier',
     version= 1.0,
     description='Classify Digit by Write it!',

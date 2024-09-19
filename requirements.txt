@@ -9,6 +9,7 @@ seaborn
 scikit-learn
 catboost
 xgboost
+dill
 # wikipedia
 
 # -e .

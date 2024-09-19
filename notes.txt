@@ -56,4 +56,4 @@ then commit: git commit -m "Setup Done!!!"
 To Activate Venv & Conda:
 
 to activate (base) anywhere(will Access conda): D:\ProgramData\anaconda3\Scripts\activate
-to activate Specific(will Activate using conda): conda activate venv
+to activate Specific(will Activate using conda): conda activate F:\KenilineK\digit_classifier\venv

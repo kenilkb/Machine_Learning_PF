@@ -1,12 +1,18 @@
-# import sys
-# from exception import customException
-# import logging
-# import logger
+import sys
+import os
+import numpy as np
+import pandas as pd
+import dill
+from src.exception import customException
 
-# if __name__ == "__main__":
-#     try:
-#         a = 1/0
-#     except Exception as e:
-#         logging.info("ZeroDivisionError!!! from Utils")
-#         raise customException(e, sys)
-
+def save_object(file_path, object):
+    try:
+        dir_path = os.path.dirname(file_path)
+        
+        os.makedirs(dir_path, exist_ok=True)
+        
+        with open(file_path, 'wb') as file_obj:
+            dill.dump(object, file_obj)
+    
+    except Exception as e:
+        raise customException(e,sys)
