@@ -60,7 +60,7 @@ if __name__ == "__main__":
     
     modeltrainer = ModelTrainer()
 
-    print("Trained with... ",modeltrainer.initiate_model_trainer(train_array, test_array) , " R2")
+    print("Trained with... ", modeltrainer.initiate_model_trainer(train_array, test_array))
     
     
     
