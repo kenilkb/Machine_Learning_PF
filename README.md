@@ -1,1 +1,1 @@
-## General MAchine Learning Plateform
+## General Machine Learning Plateform
