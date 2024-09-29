@@ -47,7 +47,7 @@ class DataTransformation:
             cat_pipeline = Pipeline(
                 steps=[
                     ('imputer', SimpleImputer(strategy = 'most_frequent')),
-                    ('one_hot_encoder', OneHotEncoder()),
+                    ('one_hot_encoder', OneHotEncoder(handle_unknown='ignore')),
                     ('scaler', StandardScaler(with_mean=False))
                 ]
             )
@@ -65,7 +65,7 @@ class DataTransformation:
             return preprocessor
             
         except Exception as e:
-            raise customException(e)
+            raise customException(e, sys)
         
     def initiate_data_transformation(self, train_path, test_path):
         
@@ -92,14 +92,16 @@ class DataTransformation:
             input_feature_train_arr = preprocessing_obj.fit_transform(input_feature_train_df)
             input_feature_test_arr =  preprocessing_obj.transform(input_feature_test_df)
             
-            train_arr = np.c_[input_feature_train_arr, np.array(target_feature_train_df)]
-            test_arr = np.c_[input_feature_test_arr, np.array(target_feature_test_df)]
+            train_arr = np.c_[input_feature_train_arr] #.drop(columns=[target_column_name], axis=1)
+            test_arr = np.c_[input_feature_test_arr]  # , np.array(target_feature_test_df)
             
             logging.info("Preprocessing Object saved!")
             
             save_object(file_path=self.data_transformation_config.preprocessor_obj_file_path, 
                         object = preprocessing_obj)
             
+            
+            print(f"Train{train_arr.shape} & Test{test_arr.shape}:  {train_arr} Test: {test_arr}")
             return (
                 train_arr, test_arr, self.data_transformation_config.preprocessor_obj_file_path
             )

@@ -20,35 +20,59 @@ def save_object(file_path, object):
         raise customException(e,sys)
     
 
-def evaluate_models(X_train,y_train,X_test,y_test,models,params,cv=3,n_jobs=3,verbose=1,refit=False):
+def evaluate_models(X_train,y_train,X_test,y_test,models,params,cv=5,n_jobs=3,verbose=1,refit=False):
     try:
         report = {}
+        model = models['AdaBoost Regressor']
         
-        for i in range(len(list(models))):
-            model = list(models.values())[i]
-            para=params[list(models.keys())[i]]
+        
+        # para=params[list(models.keys())[i]]
+        gs = GridSearchCV(estimator=model, param_grid=params.get("AdaBoost Regressor"),cv=cv,n_jobs=n_jobs,verbose=verbose,refit=refit)
+        gs.fit(X_train,y_train)
+        model.set_params(**gs.best_params_)
 
-            gs = GridSearchCV(model,para,cv=cv,n_jobs=n_jobs,verbose=verbose,refit=refit)
-            gs.fit(X_train,y_train)
+        model.fit(X_train, y_train)  # Train model
 
-            model.set_params(**gs.best_params_)
-            model.fit(X_train,y_train)
+        y_test_pred = model.predict(X_test)
 
-            #model.fit(X_train, y_train)  # Train model
+        test_model_score = r2_score(y_test, y_test_pred)
 
-            y_train_pred = model.predict(X_train)
+        report["AdaBoost Regressor"] = test_model_score
+        
+        
+        # for i in range(len(list(models)) - 1):
+        #     model = list(models.values())[i]
+        #     para=params[list(models.keys())[i]]
 
-            y_test_pred = model.predict(X_test)
+        #     gs = GridSearchCV(model,para,cv=cv,n_jobs=n_jobs,verbose=verbose,refit=refit)
+        #     gs.fit(X_train,y_train)
 
-            train_model_score = r2_score(y_train, y_train_pred)
+        #     model.set_params(**gs.best_params_)
+        #     model.fit(X_train,y_train)
 
-            test_model_score = r2_score(y_test, y_test_pred)
+        #     #model.fit(X_train, y_train)  # Train model
 
-            report[list(models.keys())[i]] = test_model_score
+        #     # y_train_pred = model.predict(X_train)
+
+        #     y_test_pred = model.predict(X_test)
+
+        #     # train_model_score = r2_score(y_train, y_train_pred)
+
+        #     test_model_score = r2_score(y_test, y_test_pred)
+
+        #     report[list(models.keys())[i]] = test_model_score
             
         return report
         
     except Exception as e:
             raise customException(e)
+        
+
+def load_object(file_path):
+    try:
+        with open(file_path, 'rb') as file_obj:
+            return dill.load(file_obj)
+    except Exception as e:
+        raise customException(e, sys)
             
             

@@ -83,8 +83,8 @@ class ModelTrainer:
                     'iterations': [30, 50, 100]
                 },
                 "AdaBoost Regressor":{
-                    'learning_rate':[.1,.01,0.5,.001],
-                    # 'loss':['linear','square','exponential'],
+                    'learning_rate':[.1,.01,0.05,.001],
+                    'loss':['linear','square','exponential'],
                     'n_estimators': [8,16,32,64,128,256]
                 }
                 
@@ -114,7 +114,7 @@ class ModelTrainer:
             
             predicted = best_model.predict(X_test)
             r2 = r2_score(y_test, predicted)
-            return r2
+            return {"model": best_model_name, "score": r2, "Prediction": [predicted, y_test]}
             
             
             
